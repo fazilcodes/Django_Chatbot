@@ -84,7 +84,7 @@ Django-Chatbot
     {% if user.is_authenticated %}
     <div class="card-header navbar1 text-white d-flex justify-content-between"><b style="color: white;">Welcome, {{ user.username }}</b> <a style="color: white;" href="logout">Logout</a></div>
     {% else %}
-    <div class="card-header bg-primary text-white"><a style="color: white;" href="login">Login</a> <a style="color: white;" href="register">Register</a></div>
+    <div class="card-header navbar1 text-white"><a style="color: white;" href="login">Login</a> <a style="color: white;" href="register">Register</a></div>
     {% endif %}
     
     <div class="card-body messages-box">

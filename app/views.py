@@ -42,15 +42,20 @@ def chat_openai(message):
 # Create your views here.
 
 def home(req):
-    chats = Chat.objects.filter(user=req.user)
+    chats = None
     if req.method == 'POST':
         message = req.POST.get('message')
         response = chat_openai(message)
 
-        chat = Chat(user=req.user, message=message, response=response, created_at=timezone.now)
-        chat.save()
+        if req.user.is_authenticated:
+            chat = Chat(user=req.user, message=message, response=response, created_at=timezone.now())
+            chat.save()
+
         return JsonResponse({'message': message, 'response': response})
-    
+
+    if req.user.is_authenticated:
+        chats = Chat.objects.filter(user=req.user)
+
     context = {
         'chats': chats
     }
